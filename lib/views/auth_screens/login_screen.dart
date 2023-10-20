@@ -5,6 +5,7 @@ import 'package:gordon_app_again/consts/colors.dart';
 import 'package:gordon_app_again/customs_widgets/custom_buttom.dart';
 import 'package:gordon_app_again/customs_widgets/custom_textformfield.dart';
 import 'package:gordon_app_again/customs_widgets/text.dart';
+import 'package:gordon_app_again/views/auth_screens/signup_screen.dart';
 import 'package:gordon_app_again/views/auth_screens/verification_screen.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -132,17 +133,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           _loginUser();
                         }
                       },
-                      child: Container(
-                        color: Colors.blue,
-                        width: double.infinity,
-                        height: 60,
-                        child: Center(
-                          child: LoadingOverlay(
-                            isLoading: isLoading,
-                            child: Center(child: Text("Login")),
-                          ),
-                        ),
-                      ),
+                      child: isLoading
+                          ? Container(
+                              height: 55,
+                              width: double.infinity,
+                              child: LoadingOverlay(
+                                  progressIndicator: CircularProgressIndicator(
+                                    color: darkBlue,
+                                  ),
+                                  isLoading: isLoading,
+                                  child: Container()),
+                            )
+                          : OurButton(
+                              text: "Log In",
+                            ),
                     ),
                     20.heightBox,
                     Row(
@@ -155,11 +159,20 @@ class _LoginScreenState extends State<LoginScreen> {
                           textColor: Colors.black,
                         ),
                         10.widthBox,
-                        const OurText(
-                          text: "Sign Up",
-                          fontSize: 15,
-                          fontBold: FontWeight.bold,
-                          textColor: darkBlue,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpScreen(),
+                                ));
+                          },
+                          child: OurText(
+                            text: "Sign Up",
+                            fontSize: 15,
+                            fontBold: FontWeight.bold,
+                            textColor: darkBlue,
+                          ),
                         ),
                       ],
                     ),

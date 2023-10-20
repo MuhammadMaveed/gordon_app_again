@@ -11,7 +11,7 @@ class CustomTextformField extends StatelessWidget {
   const CustomTextformField({
     super.key,
     this.hintText = "example@gmail.com",
-    this.labelText = "Label Text",
+    this.labelText = "",
     this.suffIcon,
     this.preIcon,
     this.enabledBorderColor = Colors.transparent,
@@ -27,7 +27,9 @@ class CustomTextformField extends StatelessWidget {
     this.obsecureText = false,
     this.verticalPadding = 8,
     this.horizentalPadding = 8,
-    required this.controller,  this.validate,
+    this.controller,
+    this.validate,
+    this.hintTextColor = Colors.black, this.middleSzeBox=10,
   });
 
   final TextEditingController? controller;
@@ -40,6 +42,7 @@ class CustomTextformField extends StatelessWidget {
   final Color? focusedBorderColor;
   final double? focusedBorderWidth;
   final Color? errorBorderColor;
+  final Color? hintTextColor;
   final double? errorBorderWidth;
   final double? borderRadius;
   final TextInputType? keyBoardType;
@@ -48,6 +51,7 @@ class CustomTextformField extends StatelessWidget {
   final bool? obsecureText;
   final double? verticalPadding;
   final double? horizentalPadding;
+  final double? middleSzeBox;
   final String? Function(String?)? validate;
 
   @override
@@ -57,10 +61,10 @@ class CustomTextformField extends StatelessWidget {
       children: [
         Text(labelText!,
             style: TextStyle(color: Color(0xff695C5C), fontSize: 14)),
-        10.heightBox,
+        middleSzeBox!.heightBox,
         TextFormField(
-          validator: validate ,
-          controller:controller,
+          validator: validate,
+          controller: controller,
           style: TextStyle(
               fontWeight: FontWeight.w400, fontSize: 15, color: Colors.black),
           obscureText: obsecureText!,
@@ -77,7 +81,9 @@ class CustomTextformField extends StatelessWidget {
             filled: true,
             hintText: hintText,
             hintStyle: TextStyle(
-                fontWeight: FontWeight.w400, fontSize: 16, color: Colors.black),
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+                color: hintTextColor),
             // labelText: labelText,
             labelStyle: TextStyle(),
             suffixIcon: Icon(
